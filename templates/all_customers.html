@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Customers - The Library</title>
+{% endblock %}
+{% block head %}
+{{ super() }}
+</style>
+{% endblock %}
+{% block content %}
+<style>
+    #footer {
+        position: absolute;
+    }
+</style>
+
+<div class="d-flex justify-content-center">
+    <h1>Customers</h1>
+</div>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-outline-dark" href="/NewCustomer/" role="button">New Customer</a>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <form class="form-inline" action="/Customers_Search" method="post">
+        <input type="text" class="from-control" name="customer_name" placeholder="Search for a customer">
+        <button class='btn btn-outline-dark' type="submit">Search</button>
+    </form>
+</div>
+<hr>
+<div class="d-flex justify-content-center">
+    {% if active_loan == True %}
+    <hr>
+    <h2>Customer is loaning a book - cannot delete the customer.</h2>
+    {% endif %}
+</div>
+<hr>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {%- for customer in customers %}
+    <div class="col">
+        <div class="card h-100">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body">
+                <h5 class="card-title">Customer Name: {{ customer.customer_name }}</h5>
+                <p class="card-text">
+                    Customer Age: {{ customer.customer_age }}
+                    <br>
+                    Customer City: {{ customer.customer_city }}
+                </p>
+                <div class="card-footer">
+                    <small class="text-muted">Customer ID: {{ customer.id }}</small>
+                </div>
+                <br>
+            </div>
+                <a href="/Customers/Delete/{{customer.id}}" class="btn btn-danger">Delete Customer</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

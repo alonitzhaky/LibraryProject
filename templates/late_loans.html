@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Late Loans - The Library</title>
+{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+<style>
+    #footer {
+        position: absolute;
+    }
+</style>
+<div class="d-flex justify-content-center">
+    <h1>Late Loans</h1>
+</div>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-success" href="/NewLoans/" role="button">New Loan</a>
+    &nbsp;
+    <a class='btn btn-danger' href="/Loans/Late/" role="button">Late Loans</a>
+    &nbsp;
+    <a class='btn btn-secondary' href="/Loans/-1" role="button">Loan History</a>
+</div>
+<hr>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {%- for one_late_loan in late_loans %}
+    <div class="col">
+        <div class="card h-100">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body">
+                <h5 class="card-title">Loan ID: {{ one_late_loan.id }}</h5>
+                <p class="card-text">Loaned Book: {{ one_late_loan.books.book_name }}
+                    <br>
+                    Loaning Customer: {{ one_late_loan.customers.customer_name }}
+                    <br>
+                    Loan Date: {{ one_late_loan.loan_date }}
+                    <br>
+                    Return Date: {{ one_late_loan.return_date }}
+                </p>
+                <a href="/Loans/Return/{{one_late_loan.id}}">
+                    <button class="btn btn-success">Return Book</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

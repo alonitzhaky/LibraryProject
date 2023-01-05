@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<title>New Customer - The Library</title>
+
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block content %}
+
+<div class="d-flex justify-content-center">
+    <form action="/Customers/" method="post">
+        <label for="customer_name">Name: </label>
+        <input type="text" name="Name" placeholder="Enter full name, please :)" required>
+        <hr>
+        <label for="customer_age">Age: </label>
+        <input type="number" name="Age" placeholder="Only digits." min="1" required>
+        <hr>
+        <label for="customer_city">City: </label>
+        <input type="text" name="City" placeholder="Only letters." required>
+        <hr>
+        <button class="btn btn-outline-dark" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

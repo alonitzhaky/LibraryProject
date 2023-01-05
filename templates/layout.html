@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% block head %}
+    <link rel="shortcut icon" href="{{url_for('static', filename = 'favicon.ico')}}">
+    {% endblock %}
+    {% block title %}
+    <title>The Library by Alon Itzhaky</title>
+    {% endblock %}
+    <style>
+        #footer {
+            background-color: white;
+            position: relative;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 5%;
+            text-align: center;
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #383838;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            background-color: #686868;
+            color: white;
+        }
+
+        li a.title {
+            color: black;
+        }
+    </style>
+    <!-- CSS Link - Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+</head>
+
+<body>
+    <ul class="d-flex justify-content-center">
+        <li><a class="active" href="/">Home</a></li>
+        <li><a class="customers" href="/Customers/">Customers</a></li>
+        <li><a class="books" href="/Books/">Books</a></li>
+        <li><a class="loans" href="/Loans/">Loans</a></li>
+    </ul>
+    <div id="content">{% block content %}{% endblock %}</div>
+    <div id="footer">
+        {% block footer %}
+        &copy; All Rights Reserved to <a href="https://www.instagram.com/alon.itzhaky">Alon Itzhaky</a> 2022
+        {% endblock %}
+    </div>
+</body>
+
+</html>

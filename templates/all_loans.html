@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Loans - The Library</title>
+{% endblock %}
+{% block head %}
+{{ super() }}
+{% endblock %}
+{% block content %}
+
+<style>
+    #footer {
+        position: fixed;
+    }
+</style>
+
+<div class="d-flex justify-content-center">
+    {%- if returned == True %}
+    <h1>Loan History</h1>
+    {% else %}
+    <h1>Loans</h1>
+    {% endif %}
+    <hr>
+</div>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-success" href="/NewLoans/" role="button">New Loan</a>
+    &nbsp;
+    <a class='btn btn-danger' href="/Loans/Late/" role="button">Late Loans</a>
+    &nbsp;
+    <a class='btn btn-secondary' href="/Loans/-1" role="button">Loan History</a>
+</div>
+<hr>
+{%- if action == "Loan successfully created!" %}
+<div class="d-flex justify-content-center">
+    <h4>Loan created successfuly!</h4>
+</div>  
+<hr>
+{% endif %}
+
+{%- if action == "Book successfully returned." %}
+<div class="d-flex justify-content-center">
+    <h4>Book has been returned.</h4>
+</div>
+<hr>
+{% endif %}
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {%- for loan in loans %}
+    <div class="col">
+        <div class="card h-100">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body">
+                <h5 class="card-title">Loan ID: {{ loan.id }}</h5>
+                <p class="card-text">Loaning Customer: {{ loan.customers.customer_name }}
+                    <br>
+                    Loaned Book: {{ loan.books.book_name }}
+                    <br>
+                    Loan Date: {{ loan.loan_date }}
+                    <br>
+                    Return Date: {{ loan.return_date }}
+                </p>
+            </div>
+            <a href="/Loans/Return/{{loan.id}}"class="btn btn-success">Return Book</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

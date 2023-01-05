@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Customers</title>
+{% endblock %}
+{% block head %}
+{{ super() }}
+</style>
+{% endblock %}
+{% block content %}
+
+<style>
+    #footer {
+        position: absolute;
+    }
+</style>
+
+<div class="d-flex justify-content-center">
+    <h1>Customers</h1>
+</div>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-outline-dark" href="/NewCustomer/" role="button">New Customer</a>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <form class="form-inline" action="/Customers">
+        <input type="text" name = "Name" placeholder="Search for a customer here.">
+        <button class='btn btn-outline-dark'type="submit">Click me!</button>
+    </form>
+</div>
+<hr>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+        <div class="card h-100">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body">
+                <h5 class="card-title">Customer Name: {{ selected.customer_name }}</h5>
+                <p class="card-text">Customer ID: {{ selected.id }}
+                    <br>
+                    Customer Age: {{ selected.customer_age }}
+                    <br>
+                    Customer City: {{ selected.customer_city }}
+                </p>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+                <br>
+                <a href="/Customers/Delete/{{selected.id}}">
+                    <button class="btn btn-danger">Delete Customer</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

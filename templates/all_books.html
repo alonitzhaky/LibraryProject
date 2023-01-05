@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>Books - The Library</title>
+{% endblock %}
+{% block head %}
+{{ super() }}
+</style>
+{% endblock %}
+{% block content %}
+
+<style>
+    #footer{
+        position: absolute;
+    }
+</style>
+
+<div class="d-flex justify-content-center">
+    <h1>Books</h1>
+</div>
+<div class="d-flex justify-content-center">
+    <a class="btn btn-outline-dark" href="/NewBook/" role="button">New Book</a>
+</div>
+<br>
+<div class="d-flex justify-content-center">
+    <form class="form-inline" action="/Books_Search" method="post">
+        <input type="text" class="from-control" name="book_name" placeholder="Search for a book">
+        <button class='btn btn-outline-dark' type="submit">Search</button>
+    </form>
+</div>
+<hr>
+<div class="d-flex justify-content-center">
+    {% if active_loan == True %}
+</div>
+<div class="d-flex justify-content-center">
+    <h1>This book cannot be deleted, as it is being loaned.</h1>
+    {% endif %}
+    </div>
+</div>
+<hr>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {%- for book in books %}
+    <div class="col">
+        <div class="card h-100">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body">
+                <h5 class="card-title">Book Name: {{ book.book_name }}</h5>
+                <p class="card-text">Book ID: {{ book.id }}
+                    <br>
+                    Author: {{ book.book_author }}
+                    <br>
+                    Book Type: {{ book.book_type }}
+                </p>
+                <div class="card-footer">
+                    <small class="text-muted">Published: {{ book.published }}</small>
+                </div>
+                <br>
+            </div>
+            <a href="/Books/Delete/{{book.id}}" class="btn btn-danger">Delete Book</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

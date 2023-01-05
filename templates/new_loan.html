@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<title>New Book - The Library</title>
+
+{% endblock %}
+
+{% block head %}
+{{ super() }}
+
+{% endblock %}
+
+{% block content %}
+
+<style>
+    #footer {
+        position: absolute;
+    }
+</style>
+
+<div class="d-flex justify-content-center">
+    <form action="/Loans/" method="post">
+        <label for="book_id">Selected Book: </label>
+        <!-- <input type="text" name="CustomerID" placeholder="Book Name"> -->
+        <select name="BookID">
+            {%- for book in all_books %}
+            <option value="{{book.id}}">
+                {{book.id}} - {{book.book_name}}
+            </option>
+            {% endfor %}
+        </select>
+        <hr>
+        <label for="customer_id">Selected Customer: </label>
+        <select name="CustomerID">
+            {%- for customer in all_customers  %}
+            <option value="{{customer.id}}">
+                {{customer.id}} - {{customer.customer_name}}
+            </option>
+            {% endfor %}
+        </select>
+        <hr>
+        <div class="justify-content-center">
+            <button class="btn btn-outline-dark" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
